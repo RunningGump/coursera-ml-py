@@ -23,8 +23,11 @@ def feature_normalize(X):
     #
     # Hint: You might find the 'np.mean' and 'np.std' functions useful.
     #       To get the same result as Octave 'std', use np.std(X, 0, ddof=1)
-    #
-
+    
+    # Calcute the mu and sigma of each colomns
+    mu = np.mean(X, axis=0)
+    sigma = np.std(X, axis=0)
+    X_norm = (X - mu) / sigma
 
 
     # ===========================================================

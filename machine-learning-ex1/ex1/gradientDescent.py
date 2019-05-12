@@ -12,8 +12,8 @@ def gradient_descent(X, y, theta, alpha, num_iters):
         # Instructions : Perform a single gradient step on the parameter vector theta
         #
         # Hint: X.shape = (97, 2), y.shape = (97, ), theta.shape = (2, )
-
-
+        error = np.dot(X, theta).flatten() - y
+        theta -= (alpha/m) * np.sum(X * error[:, np.newaxis], axis=0)
         # ===========================================================
         # Save the cost every iteration
         J_history[i] = compute_cost(X, y, theta)
@@ -29,9 +29,12 @@ def gradient_descent_multi(X, y, theta, alpha, num_iters):
     for i in range(0, num_iters):
         # ===================== Your Code Here =====================
         # Instructions : Perform a single gradient step on the parameter vector theta
-        #
+        
+        # either using flatten func or not are all ok
+        # error = np.dot(X, theta).flatten() - y
+        error = np.dot(X, theta) - y
 
-
+        theta -= (alpha / m) * np.sum(X * error[:, np.newaxis], axis=0)
         # ===========================================================
         # Save the cost every iteration
         J_history[i] = compute_cost(X, y, theta)

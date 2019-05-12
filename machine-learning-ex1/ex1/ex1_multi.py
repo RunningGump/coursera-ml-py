@@ -71,7 +71,10 @@ print('Theta computed from gradient descent : \n{}'.format(theta))
 # Recall that the first column of X is all-ones. Thus, it does
 # not need to be normalized.
 price = 0  # You should change this
-
+predict = np.array([1650, 3])
+predict = (predict - mu) / sigma
+predict = np.r_[1, predict]
+price = np.dot(predict, theta)
 
 # ==========================================================
 
@@ -110,7 +113,8 @@ print('Theta computed from the normal equations : \n{}'.format(theta))
 # Estimate the price of a 1650 sq-ft, 3 br house
 # ===================== Your Code Here =====================
 price = 0  # You should change this
-
+predict = np.array([1, 1650, 3])
+price = np.dot(predict, theta)
 
 # ==========================================================
 
