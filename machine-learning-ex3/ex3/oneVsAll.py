@@ -28,7 +28,18 @@ def one_vs_all(X, y, num_labels, lmd):
         #       function. It is okay to use a for-loop (for c in range(num_labels) to
         #       loop over the different classes
         #
+        initial_theta = np.zeros((n + 1, 1))
+        iClass = i if i else 10
+        y_i = np.array([1 if x == iClass else 0 for x in y])
 
+        def cost_func(t):
+            return lCF.lr_cost_function(t, X, y_i, lmd)[0]
+
+        def grad_func(t):
+            return lCF.lr_cost_function(t, X, y_i, lmd)[1]
+
+        theta, *unused = opt.fmin_cg(cost_func, x0=initial_theta, fprime=grad_func, maxiter=100, disp=False, full_output=True)
+        all_theta[i] = theta
 
 
         # ============================================================    

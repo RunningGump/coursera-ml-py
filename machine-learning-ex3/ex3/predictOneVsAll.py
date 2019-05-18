@@ -21,6 +21,9 @@ def predict_one_vs_all(all_theta, X):
     #        In particular, the max function can also return the index of the
     #        max element, for more information see 'np.argmax' function.
     #
-    
+    result = np.dot(all_theta, X.T)
+    result = np.roll(result, -1, axis=0) # along the axis=0 shift -1
+    result = np.vstack([np.zeros(m), result])
+    p = np.argmax(result, axis=0) # return argmax of each colomns 
 
     return p

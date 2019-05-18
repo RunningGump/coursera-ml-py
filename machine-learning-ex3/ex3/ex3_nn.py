@@ -86,7 +86,7 @@ for i in range(m):
     dd.display_data(example)
 
     pred = pd.predict(theta1, theta2, example)
-    print('Neural network prediction: {} (digit {})'.format(pred, np.mod(pred, 10)))
+    print('Neural network prediction: {} (digit {})'.format(pred, np.mod(pred, 10))) # 0 ia labeled as 10
 
     s = input('Paused - press ENTER to continue, q + ENTER to exit: ')
     if s == 'q':
