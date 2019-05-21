@@ -37,6 +37,7 @@ selected = X[rand_indices[0:100], :]
 
 dd.display_data(selected)
 
+
 input('Program paused. Press ENTER to continue')
 
 # ===================== Part 2: Loading Parameters =====================

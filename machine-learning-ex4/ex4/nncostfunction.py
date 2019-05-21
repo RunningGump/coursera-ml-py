@@ -8,6 +8,8 @@ def nn_cost_function(nn_params, input_layer_size, hidden_layer_size, num_labels,
     theta1 = nn_params[:hidden_layer_size * (input_layer_size + 1)].reshape(hidden_layer_size, input_layer_size + 1)
     theta2 = nn_params[hidden_layer_size * (input_layer_size + 1):].reshape(num_labels, hidden_layer_size + 1)
 
+#     theta1 = np.zeros((hidden_layer_size, input_layer_size + 1))
+#     theta2 = np.zeros((num_labels, hidden_layer_size + 1))
     # Useful value
     m = y.size
 
@@ -46,8 +48,33 @@ def nn_cost_function(nn_params, input_layer_size, hidden_layer_size, num_labels,
     #               the regularization separately and then add them to theta1_grad
     #               and theta2_grad from Part 2.
     #
+    Y = np.zeros((m, num_labels)) # 5000 * 10
+    for i in range(m):
+        Y[i, y[i]-1] = 1
 
+    a1 = np.c_[np.ones(m), X] # 5000 * 401
+    a2 = np.c_[np.ones(m), sigmoid(np.dot(a1, theta1.T))] # 5000 * 26
+    hypothesis = sigmoid(np.dot(a2, theta2.T)) # 5000 * 10
 
+    reg_theta1 = theta1[:, 1:] # 25 * 400
+    reg_theta2 = theta2[:, 1:] # 10 * 25
+
+    cost = np.sum(-Y * np.log(hypothesis) - (1 - Y) * np.log(1 - hypothesis)) / m \
+           + (lmd / (2 * m)) * (np.sum(reg_theta1**2) + np.sum(reg_theta2**2))
+
+    e3 = hypothesis - Y # 5000 * 10
+    e2 = np.dot(e3, theta2) * (a2 * (1 - a2)) # 5000 * 26
+    e2 = e2[:, 1:] # drop the intercept column  5000 * 25
+
+    delta1 = np.dot(e2.T, a1) # 25 * 401
+    delta2 = np.dot(e3.T, a2) # 10 * 26
+
+    # the regularization term
+    p1 = (lmd / m)  * np.c_[np.zeros(hidden_layer_size), reg_theta1]
+    p2 = (lmd / m)  * np.c_[np.zeros(num_labels), reg_theta2]
+
+    theta1_grad = (delta1 / m) + p1
+    theta2_grad = (delta2 / m) + p2
 
     # ====================================================================================
     # Unroll gradients
