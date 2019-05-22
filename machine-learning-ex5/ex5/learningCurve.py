@@ -29,7 +29,13 @@ def learning_curve(X, y, Xval, yval, lmd):
     #        Do note that you will still need to use lamdba when running the
     #        training to obtain the theta parameters.
     #
+    for i in range(m):
+        x_i = X[:i+1]
+        y_i = y[:i+1]
+        theta = tlr.train_linear_reg(x_i, y_i, lmd)
 
+        error_train[i] = lrcf.linear_reg_cost_function(theta, x_i, y_i, 0)[0]
+        error_val[i] = lrcf.linear_reg_cost_function(theta, Xval, yval, 0)[0]
 
     # ==========================================================
 

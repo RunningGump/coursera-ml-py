@@ -20,7 +20,11 @@ def validation_curve(X, y, Xval, yval):
     #                you the errors obtained after training with
     #                lmd = lambda_vec[i]
     #
-
+    for i in range(lambda_vec.size):
+        lmd = lambda_vec[i]
+        theta = tlr.train_linear_reg(X, y, lmd)
+        error_train[i] = lrcf.linear_reg_cost_function(theta, X, y, 0)[0]
+        error_val[i] = lrcf.linear_reg_cost_function(theta, Xval, yval, 0)[0] 
 
     # ==========================================================
 

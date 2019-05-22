@@ -16,8 +16,12 @@ def linear_reg_cost_function(theta, x, y, lmd):
     #                You should set 'cost' to the cost and 'grad'
     #                to the gradient
     #
+    error = np.dot(x, theta) - y
+    cost = np.sum(error ** 2) / (2 * m) + np.sum(theta[1:] ** 2) * lmd / (2 * m)
 
-
+    reg_term = theta * (lmd / m)
+    reg_term[0] = 0
+    grad = np.dot(x.T, error) / m + reg_term
     # ==========================================================
 
     return cost, grad
