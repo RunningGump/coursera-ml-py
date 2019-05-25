@@ -37,7 +37,7 @@ print('Training Linear SVM')
 # You should try to change the C value below and see how the decision
 # boundary varies (e.g., try C = 1000)
 
-c = 1000
+c = 1
 clf = svm.SVC(c, kernel='linear', tol=1e-3)
 clf.fit(X, y)
 
