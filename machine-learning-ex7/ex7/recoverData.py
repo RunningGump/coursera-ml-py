@@ -15,7 +15,8 @@ def recover_data(Z, U, K):
     #                   recovered_j = v' * U(j, 1:K)';
     #                   (above is octave code)
     #
-
+    Ureduce = U[:, np.arange(K)]
+    X_rec = np.dot(Z, Ureduce.T)
 
     # ==========================================================
 
