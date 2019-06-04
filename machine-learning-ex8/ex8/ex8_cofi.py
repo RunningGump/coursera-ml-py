@@ -211,6 +211,7 @@ p = np.dot(X, theta.T)
 my_predictions = p[:, 0] + Ymean
 
 indices = np.argsort(my_predictions)[::-1]
+# maybe has the seen movie
 print('\nTop recommendations for you:')
 for i in range(10):
     j = indices[i]
