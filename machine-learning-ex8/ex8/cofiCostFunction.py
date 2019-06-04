@@ -32,7 +32,10 @@ def cofi_cost_function(params, Y, R, num_users, num_movies, num_features, lmd):
     #        theta_grad - num_users x num_features matrix, containing the
     #                     partial derivatives w.r.t. to each element of theta
 
-
+    hypothesis = (np.dot(X, theta.T) - Y) * R
+    cost = (1 / 2) * np.sum(hypothesis ** 2) + (lmd / 2) * np.sum(theta ** 2) + (lmd / 2) * np.sum(X ** 2)
+    X_grad = np.dot(hypothesis, theta) + lmd * X
+    theta_grad = np.dot(hypothesis.T, X) + lmd * theta
 
     # ==========================================================
 
